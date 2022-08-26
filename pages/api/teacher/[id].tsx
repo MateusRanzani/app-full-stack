@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
 import { ObjectID } from "mongodb";
-import connect from "../../utils/database";
+import connect from "../../../utils/database";
 
 type ErrorResponseType = {
   error: string;
@@ -25,7 +25,7 @@ export default async (
   res: NextApiResponse<ErrorResponseType | SuccessResponseType>
 ): Promise<void> => {
   if (req.method === "GET") {
-    const { id } = req.body;
+    const { id } = req.query;
 
     if (!id) {
       res.status(400).json({ error: "Missing teacher ID on request body" });
@@ -39,12 +39,12 @@ export default async (
 
     if (!response) {
       res.status(400).json({ error: "Teacher not found" });
-      return
+      return;
     }
 
     res.status(200).json(response);
   } else {
     res.status(400).json({ error: "Wrong request method" });
-    return
+    return;
   }
 };

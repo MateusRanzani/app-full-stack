@@ -20,16 +20,19 @@ export default async (
     }
 
     const { db } = await connect();
-    const response = await db.collection("users").find({ courses }).toArray();
+    const response = await db
+      .collection("users")
+      .find({ courses: { $inc: [new RegExp(`^${courses}`, "i")] } })
+      .toArray();
 
     if (response.length === 0) {
       res.status(400).json({ error: "Courses not found" });
-      return
+      return;
     }
 
     res.status(200).json(response);
   } else {
     res.status(400).json({ error: "Wrong request method" });
-    return
+    return;
   }
 };

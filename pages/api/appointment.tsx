@@ -2,7 +2,7 @@
 import { ObjectID } from "mongodb";
 import type { NextApiRequest, NextApiResponse } from "next";
 import connect from "../../utils/database";
-import { getSession, SessionProvider } from "next-auth/react"
+import { getSession, SessionProvider } from "next-auth/react";
 
 type ErrorResponseType = {
   error: string;
@@ -40,6 +40,15 @@ export default async (
       course,
       location,
       appointment_link,
+    }: {
+      date: string;
+      teacher_name: string;
+      teacher_id: string;
+      student_name: string;
+      student_id: string;
+      course: string;
+      location: string;
+      appointment_link: string;
     } = req.body;
 
     if (
@@ -94,14 +103,14 @@ export default async (
       .collection("users")
       .updateOne(
         { _id: ObjectID(teacher_id) },
-        { $push: { appointments: appointment } }
+        { $push: { appointments: appointment }, $inc: { coins: 1 } }
       );
 
     await db
       .collection("users")
       .updateOne(
         { _id: ObjectID(student_id) },
-        { $push: { appointments: appointment } }
+        { $push: { appointments: appointment }, $inc: { coins: -1 } }
       );
   } else {
     res.status(400).json({ error: "Wrong request method" });
