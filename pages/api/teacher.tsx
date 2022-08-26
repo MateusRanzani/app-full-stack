@@ -1,5 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
+import { ObjectID } from "mongodb";
 import connect from "../../utils/database";
 
 type ErrorResponseType = {
@@ -7,36 +8,43 @@ type ErrorResponseType = {
 };
 
 type SuccessResponseType = {
-  _id: string;
   name: string;
   email: string;
   cellphone: string;
   teacher: string;
+  coins: number;
+  courses: string[];
+  available_hours: {};
+  available_locations: string[];
+  reviews: [];
+  appointments: [];
 };
 
 export default async (
   req: NextApiRequest,
   res: NextApiResponse<ErrorResponseType | SuccessResponseType>
 ): Promise<void> => {
-  if (req.method === "POST") {
-    const { name, email, cellphone, teacher } = req.body;
+  if (req.method === "GET") {
+    const { id } = req.body;
 
-    if (!name || !email || !cellphone || !teacher) {
-      res.status(400).json({ error: "Missing body parameter" });
+    if (!id) {
+      res.status(400).json({ error: "Missing teacher ID on request body" });
       return;
     }
 
     const { db } = await connect();
+    const response = await db
+      .collection("users")
+      .findOne({ _id: new ObjectID(id) });
 
-    const response = await db.collection("users").insertOne({
-      name,
-      email,
-      cellphone,
-      teacher,
-    });
+    if (!response) {
+      res.status(400).json({ error: "Teacher not found" });
+      return
+    }
 
-    res.status(200).json(response.ops[0]);
+    res.status(200).json(response);
   } else {
     res.status(400).json({ error: "Wrong request method" });
+    return
   }
 };
