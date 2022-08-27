@@ -39,11 +39,7 @@ export default function Component() {
             <button onClick={() => signOut()}>Sign out</button>
           </div>
         )}
-        {loading && (
-          <div>
-            Carregando...
-          </div>
-        )}
+        {loading && <div>Carregando...</div>}
       </div>
     </>
   );
