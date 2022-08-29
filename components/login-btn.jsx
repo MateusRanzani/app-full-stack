@@ -9,17 +9,20 @@ export default function Component() {
 
   return (
     <>
-      <div>
+      <div style={{width:"100vw", height:"calc(100vh - 54px)"}} class="flex justify-center items-center ..." >
         {!session && (
-          <div>
-            Fazer login
-            <br />
-            <button
-              onClick={() => signIn("auth0")}
-              className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
-            >
-              Login
-            </button>
+          
+          <div style={{width:"auto", height:"auto", backgroundColor:"#04D361", padding:"4rem 7rem 4rem 7rem", borderRadius:"3rem"}} class="flex justify-center items-center ...">
+            <div >
+              Fazer login
+              <br />
+              <button
+                onClick={() => signIn("auth0")}
+                className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+              >
+                Login
+              </button>
+            </div>
           </div>
         )}
         {session && data && (

@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import Link from "next/link";
 import { useState, useCallback } from "react";
 import api from "../../utils/api";
 
@@ -18,13 +19,20 @@ interface Teacher {
 
 const SearchPage: NextPage = () => {
   const [textInput, setTextInput] = useState("");
+  const [messageError, setMessageError] = useState("");
   const [data, setData] = useState<Teacher[]>([]);
 
   const handleSearch = (textInput: string) => {
-    api(`/api/search/${textInput}`).then((response) => {
-      const teachers: Teacher[] = response.data;
-      setData(teachers);
-    });
+    api(`/api/search/${textInput}`)
+      .then((response) => {
+        const teachers: Teacher[] = response.data;
+        setData(teachers);
+        setMessageError("");
+      })
+      .catch((error) => {
+        setMessageError(error.response.data.error);
+        setData([]);
+      });
   };
 
   return (
@@ -47,11 +55,12 @@ const SearchPage: NextPage = () => {
       >
         Pesquisar
       </button>
+      {messageError !== "" && <div>{messageError}</div>}
       {data.length > 0 &&
         data.map((teacher) => (
-          <h1 className="text-2xl" key={teacher._id}>
-            {teacher.name}
-          </h1>
+          <Link href={`/search/${teacher._id}`} key={teacher._id}>
+            <h1 className="text-2xl">{teacher.name}</h1>
+          </Link>
         ))}
     </div>
   );
