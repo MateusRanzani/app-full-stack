@@ -20,29 +20,33 @@ const SearchPage: NextPage = () => {
   const [textInput, setTextInput] = useState("");
   const [data, setData] = useState<Teacher[]>([]);
 
-  const handleSearch = useCallback(() => {
+  const handleSearch = (textInput: string) => {
     api(`/api/search/${textInput}`).then((response) => {
       const teachers: Teacher[] = response.data;
       setData(teachers);
     });
-  }, []);
+  };
 
   return (
     <div>
       <h1>Bem vindo a página Search.</h1>
 
-        <input
-          type="text"
-          value={textInput}
-          placeholder="Digite a disciplina que você procura..."
-          className="text-2xl border-2 border-box w-3/12 m-auto text-center my-12"
-          onChange={(e: any) => {
-            setTextInput(state => e.target.value)
-          }}
-        />
-        <button type="submit" onClick={handleSearch} className="">
-          Pesquisar
-        </button>
+      <input
+        type="text"
+        value={textInput}
+        placeholder="Digite a disciplina que você procura..."
+        className="text-2xl border-2 border-box w-3/12 m-auto text-center my-12"
+        onChange={(e: any) => {
+          setTextInput(e.target.value);
+        }}
+      />
+      <button
+        type="submit"
+        onClick={() => handleSearch(textInput)}
+        className=""
+      >
+        Pesquisar
+      </button>
       {data.length > 0 &&
         data.map((teacher) => (
           <h1 className="text-2xl" key={teacher._id}>
