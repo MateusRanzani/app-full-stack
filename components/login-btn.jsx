@@ -9,16 +9,13 @@ export default function Component() {
 
   return (
     <>
-      <div style={{width:"100vw", height:"calc(100vh - 54px)"}} class="flex justify-center items-center ..." >
+      <div className="flex justify-center items-center ...">
         {!session && (
-          
-          <div style={{width:"auto", height:"auto", backgroundColor:"#04D361", padding:"4rem 7rem 4rem 7rem", borderRadius:"3rem"}} class="flex justify-center items-center ...">
-            <div >
-              Fazer login
-              <br />
+          <div className="flex justify-center items-center ...">
+            <div>
               <button
                 onClick={() => signIn("auth0")}
-                className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+                className="px-4 py-1 text-sm  text-[white] font-semibold rounded-full hover:text-white hover:bg-[#04D361] hover:border border-neutral-50 focus:outline-none  "
               >
                 Login
               </button>
@@ -28,9 +25,9 @@ export default function Component() {
         {session && data && (
           <>
             <div>
-              Signed in as {session.user.email} <br />
-              <p> {data.data.coins}</p>
-              <button onClick={() => signOut()}>Sign out</button>
+              {/* Signed in as {session.user.email} <br />
+              <p> {data.data.coins}</p> */}
+              <button onClick={() => signOut()}>Sair</button>
             </div>
           </>
         )}

@@ -1,0 +1,26 @@
+@media only screen and (max-width: 699px) {
+}
+
+@media only screen and (min-width: 700px) {
+  
+  .totalPageNews {
+    height: calc(100vh - 61.63px);
+    padding: 1rem;
+  }
+
+  .contentNewsPage {
+    display: flex;
+    height: 100%;
+    background-color: red;
+  }
+  
+
+  /* CSS FOR COMPONENTS TO PAGE */
+
+  .pageNewsComponent {
+    margin: 0.5rem;
+    height: 20rem;
+    width: 19.5rem;
+    background-color: white;
+  }
+}

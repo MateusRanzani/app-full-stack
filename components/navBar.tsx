@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const NavBar: NextPage = () => {
-  const macbookIphone = require("../public/src/iconlogo.png");
+  const icon = require("../public/src/assets/iconlogo.png");
 
   return (
     <nav>
@@ -12,7 +12,7 @@ const NavBar: NextPage = () => {
           <div className="mr-6">
             <Link href="/">
               <a>
-                <Image src={macbookIphone} width="40" height="40" />
+                <Image src={icon} width="40" height="40" />
               </a>
             </Link>
           </div>
@@ -32,7 +32,7 @@ const NavBar: NextPage = () => {
             </Link>
           </div>
           <div className="mr-3">
-            <Link href="/">
+            <Link href="/news">
               <button className="px-4 py-1 text-sm  text-[#04D361] font-semibold rounded-full border border-[#04D361][0.05] hover:text-white hover:bg-[#04D361] hover:border-transparent focus:outline-none  ">
                 NOTÍCIAS
               </button>
