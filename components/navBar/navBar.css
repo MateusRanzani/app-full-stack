@@ -1,0 +1,39 @@
+.navBar {
+  padding: 0.5rem 3rem;
+}
+
+a.--button {
+  font-weight: 700;
+  color: #04d361;
+
+  transition: all ease 0.3s;
+}
+
+a.--button:hover {
+  color: #01b653;
+}
+
+a.login--button {
+  color: white;
+  background-color: #04d361;
+  padding: 0.3rem 1.3rem;
+  border-radius: 50px;
+
+  transition: all ease 0.3s;
+}
+
+a.login--button:hover {
+  background-color: #01b653;
+}
+
+.icon--logo {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    border-radius: 50px;
+    background-color: #04d361;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
